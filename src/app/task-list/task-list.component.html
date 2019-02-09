@@ -1,0 +1,11 @@
+<h3 *ngIf="tasksPersonal.length > 0">Личные таски</h3>
+<div *ngFor="let task of tasksPersonal">
+  <app-task (editRequest)="editTask($event)" (deleteRequest)="deleteTask($event)" [task]="task"></app-task>
+  <p>===================================================</p>
+</div>
+
+<h3 *ngIf="tasksWork. length > 0">Рабочие таски</h3>
+<div *ngFor="let task of tasksWork">
+  <app-task  (editRequest)="editTask($event)" (deleteRequest)="deleteTask($event)" [task]="task"></app-task>
+  <p>===================================================</p>
+</div>

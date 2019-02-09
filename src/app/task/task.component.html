@@ -1,0 +1,7 @@
+<div [style.width]="'500px'" appTaskLight [taskDate]="task.deadLine" >
+  <p>Название: {{task.title}}</p>
+  <p>Дата до: {{task.deadLine}}</p>
+  <p>Тип: {{task.type}}</p>
+  <button mat-raised-button (click)="edit()">редактировать</button>
+  <button mat-raised-button (click)="delete()">удалить</button>
+</div>

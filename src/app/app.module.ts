@@ -1,18 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+
+import {MaterialAppModule} from "./ngmaterial.module";
+import {FormsAppModule} from "./ngforms.module";
+
 import { AppComponent } from './app.component';
+import { TaskComponent } from './task/task.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import {VisualServiceComponent} from "./visual-service/visual-service.component";
+
+import {TaskService} from "../services/task.service";
+import {TaskTypesPipe} from "../pipes/task-types";
+import {TaskLightDirective} from "./directives/taskLight.directive";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TaskComponent,
+    TaskListComponent,
+    EditTaskComponent,
+    TaskTypesPipe,
+    VisualServiceComponent,
+    TaskLightDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialAppModule,
+    FormsAppModule
   ],
-  providers: [],
+  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
