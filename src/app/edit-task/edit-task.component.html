@@ -13,5 +13,12 @@
   <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
   <mat-datepicker #myDatepicker></mat-datepicker>
   <br>
+  <!--<mat-label>Autosize textarea</mat-label>-->
+  <!--<textarea matInput-->
+            <!--cdkTextareaAutosize-->
+            <!--#autosize="cdkTextareaAutosize"-->
+            <!--cdkAutosizeMinRows="2"-->
+            <!--cdkAutosizeMaxRows="5"></textarea>-->
+  <br>
   <button mat-raised-button (click)="task ? updateTask(inputForTitle.value) : createTask(inputForTitle.value)">{{action}}</button>
 </div>

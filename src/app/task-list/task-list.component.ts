@@ -1,6 +1,5 @@
 import {Component, DoCheck, OnInit, Output, OnChanges, Input} from '@angular/core';
 import {Task} from "../../models/task.model";
-import {TaskService} from "../../services/task.service";
 import {EventEmitter} from "@angular/core";
 import {Types} from "../../models/types";
 import _ from 'lodash';
@@ -29,7 +28,11 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.tasksPersonal = [];
     this.tasksWork = [];
     for (let i = 0 ; i < localStorage.length; ++i ) {
-      let item = JSON.parse( localStorage.getItem( localStorage.key( i ) ) );
+      let item = JSON.parse( localStorage.getItem( localStorage.key( i ) ),(key, value)=>{
+        if (key == 'deadLine') return new Date(value);
+        return value;
+      } );
+      console.log("получено из локал", item);
       if (item.type == Types.WORKING){
         this.tasksWork.push(item);
       }
@@ -53,6 +56,7 @@ export class TaskListComponent implements OnInit, OnChanges {
       return item.id == task.id;
     });
     localStorage.removeItem(`${task.id}`);
+    this.getTasksFromLocalStorage();
   }
 
   editTask(task:Task){

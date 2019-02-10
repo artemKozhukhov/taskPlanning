@@ -1,9 +1,7 @@
 import {Component, Input, OnInit, Output, OnChanges, DoCheck} from '@angular/core';
 import {Task} from "../../models/task.model";
 import {Types} from "../../models/types";
-import {TaskService} from "../../services/task.service";
 import {EventEmitter} from "@angular/core";
-import {max} from "rxjs/operators";
 
 
 @Component({

@@ -9,9 +9,7 @@ import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
-import {VisualServiceComponent} from "./visual-service/visual-service.component";
 
-import {TaskService} from "../services/task.service";
 import {TaskTypesPipe} from "../pipes/task-types";
 import {TaskLightDirective} from "./directives/taskLight.directive";
 
@@ -22,7 +20,6 @@ import {TaskLightDirective} from "./directives/taskLight.directive";
     TaskListComponent,
     EditTaskComponent,
     TaskTypesPipe,
-    VisualServiceComponent,
     TaskLightDirective
   ],
   imports: [
@@ -31,7 +28,6 @@ import {TaskLightDirective} from "./directives/taskLight.directive";
     MaterialAppModule,
     FormsAppModule
   ],
-  providers: [TaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
