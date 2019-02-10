@@ -1,10 +1,11 @@
 <h3>Сейчас: {{currentDate}}</h3>
 <h1>Планировщик задач</h1>
 <p>====================</p>
-<app-edit-task (updateRequest)="updateTaskList()" *ngIf="visualDetail" (closeDetailRequest)="closeDetail()"  [task]="editableTask"></app-edit-task>
+<app-edit-task (updateListRequest)="updateTaskList()" *ngIf="visualDetail" (closeDetailRequest)="closeDetail()"  [task]="editableTask"></app-edit-task>
 <p>====================</p>
 <button (click)="addNewTask()" mat-raised-button>Добавить</button>
+<button (click)="clearStorage()">Очистить хранилище</button>
 <app-task-list [isUpdate]="isUpdate"  (taskForEdit)="sendTaskToEdit($event)"></app-task-list>
 
-<visual-service [class.info]="true"></visual-service>
+<!--<visual-service [class.info]="true"></visual-service>-->
 

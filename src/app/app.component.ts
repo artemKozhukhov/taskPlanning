@@ -12,6 +12,7 @@ export class AppComponent {
   visualDetail:boolean = false;
   currentDate: Date = new Date();
   isUpdate: boolean = false;
+
   addNewTask(){
     this.visualDetail = true;
     this.editableTask = null;
@@ -28,6 +29,10 @@ export class AppComponent {
 
   updateTaskList(){
     this.isUpdate = !this.isUpdate;
+  }
+
+  clearStorage(){
+    localStorage.clear();
   }
 
 }

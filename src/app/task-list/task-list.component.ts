@@ -12,45 +12,47 @@ import _ from 'lodash';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit, OnChanges {
-  tasks:Task[] = [];
   tasksWork:Task[]=[];
   tasksPersonal:Task[] = [];
   @Input() isUpdate:boolean;
   @Output() taskForEdit : EventEmitter<Task> = new EventEmitter();
 
-  constructor(private taskService: TaskService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getTasksFromService();
   }
   ngOnChanges(): void {
-    this.getTasksFromService();
+    this.getTasksFromLocalStorage();
   }
 
-
-  getTasksFromService(){
-    this.tasks = this.taskService.getTasks().slice();
-    this.tasksWork = [];
+  getTasksFromLocalStorage(){
     this.tasksPersonal = [];
-    this.tasks.forEach((item)=>{
-      if(item.type == Types.WORKING){
+    this.tasksWork = [];
+    for (let i = 0 ; i < localStorage.length; ++i ) {
+      let item = JSON.parse( localStorage.getItem( localStorage.key( i ) ) );
+      if (item.type == Types.WORKING){
         this.tasksWork.push(item);
       }
-      else{
+      else {
         this.tasksPersonal.push(item);
       }
-    });
-    this.tasks= null;
+    }
+    console.log("извлеклись WORK таски из local storage", this.tasksWork);
+    console.log("извлеклись PERSONAL таски из local storage", this.tasksPersonal);
   }
+
 
 
 
   deleteTask(task: Task){
-    _.remove(this.tasks, (item)=>{
-      return item.number === task.number;
+    console.log("пришел таск на удаление",task);
+    _.remove(this.tasksWork, (item)=>{
+      return item.id == task.id;
     });
-    this.taskService.deleteTask(task);
-    this.getTasksFromService();
+    _.remove(this.tasksPersonal, (item)=>{
+      return item.id == task.id;
+    });
+    localStorage.removeItem(`${task.id}`);
   }
 
   editTask(task:Task){

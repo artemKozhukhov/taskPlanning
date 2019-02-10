@@ -4,12 +4,12 @@ import _ from 'lodash';
 
 export class TaskService{
   private tasks: Task[] = [
-    new Task("Buy products", new Date(2019,1,11), Types.PERSONAL),
-    new Task("Do homework", new Date(2019,1,9), Types.PERSONAL),
-    new Task("Buy tickets", new Date(2019,2,8), Types.PERSONAL),
-    new Task("Write new function", new Date(2019,1,10), Types.WORKING),
-    new Task("Meet with Bob", new Date(2019,1,9), Types.WORKING),
-    new Task("Call to mother", new Date(2019,1,3), Types.PERSONAL),
+    // new Task("Buy products", new Date(2019,1,11), Types.PERSONAL),
+    // new Task("Do homework", new Date(2019,1,9), Types.PERSONAL),
+    // new Task("Buy tickets", new Date(2019,2,8), Types.PERSONAL),
+    // new Task("Write new function", new Date(2019,1,10), Types.WORKING),
+    // new Task("Meet with Bob", new Date(2019,1,9), Types.WORKING),
+    // new Task("Call to mother", new Date(2019,1,3), Types.PERSONAL),
   ];
 
   public getTasks(): Task[]{

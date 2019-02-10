@@ -3,6 +3,7 @@ import {Task} from "../../models/task.model";
 import {Types} from "../../models/types";
 import {TaskService} from "../../services/task.service";
 import {EventEmitter} from "@angular/core";
+import {max} from "rxjs/operators";
 
 
 @Component({
@@ -12,13 +13,13 @@ import {EventEmitter} from "@angular/core";
 })
 export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   @Input() task: Task;
-  @Output() updateRequest : EventEmitter<any> = new EventEmitter();
+  @Output() updateListRequest : EventEmitter<any> = new EventEmitter();
   @Output() closeDetailRequest: EventEmitter<boolean>= new EventEmitter();
   types = Types;
   selectedType: string;
   selectedDate: Date;
   action: string;
-  constructor(private taskService: TaskService) {
+  constructor() {
   }
 
   ngOnChanges(): void {
@@ -42,18 +43,22 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
     this.task.title = title;
     this.task.type = this.selectedType;
     this.task.deadLine = this.selectedDate;
-    this.taskService.editTask(this.task);
-    setTimeout(()=>{
-      this.updateRequest.emit();
-    }, 2000);
-    // this.closeDetail();
+    this.updateListRequest.emit();
+    localStorage.setItem(`${this.task.id}`,JSON.stringify(this.task));
+
   }
+
   createTask(title: string){
-    this.task = new Task(title, this.selectedDate, this.selectedType);
-    this.taskService.addTask(this.task);
-    setTimeout(()=>{
-      this.updateRequest.emit();
-    }, 2000);
+    let maxID = 0;
+    for(let i = 0; i < localStorage.length; i++){
+      let keyValue = +localStorage.key(i);
+      if (keyValue >= maxID){
+        maxID = keyValue + 1;
+      }
+    }
+    this.task = new Task(title, this.selectedDate, this.selectedType, maxID);
+    this.updateListRequest.emit();
+    localStorage.setItem(`${maxID}`,JSON.stringify(this.task));
     this.closeDetail();
   }
 
