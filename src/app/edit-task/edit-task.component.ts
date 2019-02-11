@@ -1,13 +1,14 @@
-import {Component, Input, OnInit, Output, OnChanges, DoCheck} from '@angular/core';
+import {Component, Input, OnInit, Output, OnChanges, DoCheck, Inject} from '@angular/core';
 import {Task} from "../../models/task.model";
 import {Types} from "../../models/types";
 import {EventEmitter} from "@angular/core";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {DataLocalStorageService} from "../../services/data-local-storage.service";
 
 
 @Component({
   selector: 'app-edit-task',
-  templateUrl: './edit-task.component.html',
-  styleUrls: ['./edit-task.component.css']
+  templateUrl: './edit-task.component.html'
 })
 export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   @Input() task: Task;
@@ -16,13 +17,13 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   types = Types;
   selectedType: string;
   selectedDate: Date;
-  action: string;
-  constructor() {
-  }
+  actionLabel: string;
+  action: any;
+  constructor(private dataLocalStorage: DataLocalStorageService) {}
 
   ngOnChanges(): void {
-    console.log("Пришла таска в редактирование onChanges",this.task);
-    this.action = this.task ? "Обновить" : "Создать";
+    this.actionLabel = this.task ? "Обновить" : "Создать";
+    this.action = this.task ? this.updateTask : this.createTask;
     this.selectedType = this.task ? this.task.type : "Неизвестный тип";
     this.selectedDate = this.task ? this.task.deadLine : new Date();
   }
@@ -38,12 +39,11 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
     this.task = null;
   }
   updateTask(title: string){
-    this.task.title = title;
+    this.task.title = title?title:"Новая таска";
     this.task.type = this.selectedType;
     this.task.deadLine = this.selectedDate;
-    this.updateListRequest.emit();
-    localStorage.setItem(`${this.task.id}`,JSON.stringify(this.task));
-
+    this.dataLocalStorage.addTask(`${this.task.id}`, this.task);
+    // this.updateListRequest.emit();
   }
 
   createTask(title: string){
@@ -55,14 +55,15 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
       }
     }
     this.task = new Task(title, this.selectedDate, this.selectedType, maxID);
-    this.updateListRequest.emit();
-    localStorage.setItem(`${maxID}`,JSON.stringify(this.task));
+    this.dataLocalStorage.addTask(`${this.task.id}`, this.task);
+    // this.updateListRequest.emit();
     this.closeDetail();
   }
 
 
-
-
-
-
 }
+
+
+
+
+

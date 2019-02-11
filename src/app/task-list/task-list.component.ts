@@ -3,6 +3,7 @@ import {Task} from "../../models/task.model";
 import {EventEmitter} from "@angular/core";
 import {Types} from "../../models/types";
 import _ from 'lodash';
+import {DataLocalStorageService} from "../../services/data-local-storage.service";
 
 
 @Component({
@@ -11,59 +12,52 @@ import _ from 'lodash';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit, OnChanges {
+  tasks: Task[] =[];
   tasksWork:Task[]=[];
   tasksPersonal:Task[] = [];
-  @Input() isUpdate:boolean;
+  tasksUnknown: Task[] = [];
+  @Input() isUpdate: boolean;
   @Output() taskForEdit : EventEmitter<Task> = new EventEmitter();
 
-  constructor() { }
+  constructor(private dataLocalStorageService: DataLocalStorageService) { }
 
   ngOnInit() {
   }
   ngOnChanges(): void {
-    this.getTasksFromLocalStorage();
+    this.getTasks();
   }
 
-  getTasksFromLocalStorage(){
+  getTasks(){
+    this.tasks = this.dataLocalStorageService.getData();
     this.tasksPersonal = [];
     this.tasksWork = [];
-    for (let i = 0 ; i < localStorage.length; ++i ) {
-      let item = JSON.parse( localStorage.getItem( localStorage.key( i ) ),(key, value)=>{
-        if (key == 'deadLine') return new Date(value);
-        return value;
-      } );
-      console.log("получено из локал", item);
+    this.tasksUnknown =[];
+    for (let i = 0 ; i < this.tasks.length; i++ ) {
+      let item = this.tasks[i];
       if (item.type == Types.WORKING){
         this.tasksWork.push(item);
       }
-      else {
+      else if(item.type == Types.PERSONAL){
         this.tasksPersonal.push(item);
       }
+      else {
+        this.tasksUnknown.push(item);
+      }
     }
-    console.log("извлеклись WORK таски из local storage", this.tasksWork);
-    console.log("извлеклись PERSONAL таски из local storage", this.tasksPersonal);
   }
 
-
-
-
   deleteTask(task: Task){
-    console.log("пришел таск на удаление",task);
-    _.remove(this.tasksWork, (item)=>{
-      return item.id == task.id;
-    });
-    _.remove(this.tasksPersonal, (item)=>{
-      return item.id == task.id;
-    });
-    localStorage.removeItem(`${task.id}`);
-    this.getTasksFromLocalStorage();
+    //удаляем локально?
+    // _.remove(this.tasks, (item)=>{
+    //   return item.id == task.id;
+    // });
+    this.dataLocalStorageService.deleteTask(task);
+    //костыль. вручную делаем запрос на обновление даты, надо прослушивать
+    // this.getTasks();
   }
 
   editTask(task:Task){
     this.taskForEdit.emit(task);
   }
-
-
-
 
 }

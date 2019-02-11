@@ -9,3 +9,9 @@
   <app-task  (editRequest)="editTask($event)" (deleteRequest)="deleteTask($event)" [task]="task"></app-task>
   <p>===================================================</p>
 </div>
+
+<h3 *ngIf="tasksUnknown. length > 0">Неизвестные таски</h3>
+<div *ngFor="let task of tasksUnknown">
+  <app-task  (editRequest)="editTask($event)" (deleteRequest)="deleteTask($event)" [task]="task"></app-task>
+  <p>===================================================</p>
+</div>

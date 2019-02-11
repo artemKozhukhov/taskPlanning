@@ -16,9 +16,6 @@ export class TaskLightDirective implements OnInit{
 
   ngOnInit(): void {
     let msToTask = (+this.taskDate) - (+this.currentDate);
-    console.log("таска в директиве", typeof(this.taskDate));
-    console.log("таска в директиве2", typeof(this.currentDate));
-    console.log("разница", msToTask);
     if (msToTask > this.getMSFromDays(1)){
       this.el.nativeElement.style.backgroundColor = 'green';
     }

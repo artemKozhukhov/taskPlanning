@@ -13,7 +13,7 @@ export class AppComponent {
   currentDate: Date = new Date();
   isUpdate: boolean = false;
 
-  addNewTask(){
+  openTaskAdding(){
     this.visualDetail = true;
     this.editableTask = null;
   }

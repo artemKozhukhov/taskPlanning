@@ -1,10 +1,10 @@
 <div>
   <h1>Карточка создания</h1><button (click)="closeDetail()" mat-button>Закрыть</button><br>
-  <span>Название:</span><input #inputForTitle [value]="task ? task.title : 'Новая задача'" ><br>
+  <span>Название:</span><input #inputForTitle (keyup.enter)="action(inputForTitle.value)" [value]="task?.title" ><br>
   <span>Тип:</span>
   <mat-radio-group (change)="selectedType = $event.value">
-    <mat-radio-button [checked]="task ? task.type == types.PERSONAL : false" [value]="types.PERSONAL">{{types.PERSONAL}}</mat-radio-button>
-    <mat-radio-button [checked]="task ? task.type == types.WORKING : false" [value]="types.WORKING">{{types.WORKING}}</mat-radio-button>
+    <mat-radio-button [checked]="task?.type == types.PERSONAL" [value]="types.PERSONAL">{{types.PERSONAL}}</mat-radio-button>
+    <mat-radio-button [checked]="task?.type == types.WORKING" [value]="types.WORKING">{{types.WORKING}}</mat-radio-button>
   </mat-radio-group>
   <p>Описание:</p>
   <p>Дата до:</p>
@@ -20,5 +20,5 @@
             <!--cdkAutosizeMinRows="2"-->
             <!--cdkAutosizeMaxRows="5"></textarea>-->
   <br>
-  <button mat-raised-button (click)="task ? updateTask(inputForTitle.value) : createTask(inputForTitle.value)">{{action}}</button>
+  <button mat-raised-button (click)="action(inputForTitle.value)">{{actionLabel}}</button>
 </div>

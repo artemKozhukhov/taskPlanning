@@ -9,9 +9,13 @@ import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { EditTaskComponent } from './edit-task/edit-task.component';
+import {EditTaskButton} from "./edit-task-button/edit-task-button.component";
+import {DeleteTaskButton} from "./delete-task-button/delete-task-button.component";
+import {DataLocalStorageService} from "../services/data-local-storage.service";
 
 import {TaskTypesPipe} from "../pipes/task-types";
 import {TaskLightDirective} from "./directives/taskLight.directive";
+import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -19,6 +23,8 @@ import {TaskLightDirective} from "./directives/taskLight.directive";
     TaskComponent,
     TaskListComponent,
     EditTaskComponent,
+    EditTaskButton,
+    DeleteTaskButton,
     TaskTypesPipe,
     TaskLightDirective
   ],
@@ -26,8 +32,12 @@ import {TaskLightDirective} from "./directives/taskLight.directive";
     BrowserModule,
     AppRoutingModule,
     MaterialAppModule,
-    FormsAppModule
+    FormsAppModule,
   ],
+  providers: [
+    DataLocalStorageService
+  ],
+  entryComponents: [EditTaskComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

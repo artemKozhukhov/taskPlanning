@@ -18,7 +18,6 @@ export class TaskComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("таска внутри таска", this.task);
   }
 
 
