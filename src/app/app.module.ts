@@ -8,6 +8,7 @@ import {FormsAppModule} from "./ngforms.module";
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
+import {TaskListPartComponent} from "./task-list-part/task-list-part.component";
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import {EditTaskButton} from "./edit-task-button/edit-task-button.component";
 import {DeleteTaskButton} from "./delete-task-button/delete-task-button.component";
@@ -22,6 +23,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
     AppComponent,
     TaskComponent,
     TaskListComponent,
+    TaskListPartComponent,
     EditTaskComponent,
     EditTaskButton,
     DeleteTaskButton,

@@ -11,28 +11,26 @@ export class AppComponent {
   editableTask: Task;
   visualDetail:boolean = false;
   currentDate: Date = new Date();
-  isUpdate: boolean = false;
 
   openTaskAdding(){
-    this.visualDetail = true;
     this.editableTask = null;
+    this.openEditTask();
   }
-
   sendTaskToEdit(task: Task){
     this.editableTask = task;
+    this.openEditTask()
+  }
+
+  closeDetail(){
+    this.closeEditTask();
+    this.editableTask = null;
+  }
+  openEditTask(){
     this.visualDetail = true;
   }
-  closeDetail(){
-    this.editableTask = null;
+  closeEditTask(){
     this.visualDetail = false;
   }
 
-  updateTaskList(){
-    this.isUpdate = !this.isUpdate;
-  }
-
-  clearStorage(){
-    localStorage.clear();
-  }
 
 }

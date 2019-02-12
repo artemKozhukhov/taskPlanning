@@ -8,5 +8,6 @@
 // ];
 export const Types = {
   WORKING:"Рабочая",
-  PERSONAL:"Личная"
+  PERSONAL:"Личная",
+  UNKNOWN:"Неизвестный тип"
 };

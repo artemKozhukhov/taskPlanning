@@ -1,5 +1,5 @@
 <div>
-  <h1>Карточка создания</h1><button (click)="closeDetail()" mat-button>Закрыть</button><br>
+  <h1>{{task ? "Карточка редактирования" : "Карточка создания"}}</h1><button (click)="closeDetail()" mat-button>Закрыть</button><br>
   <span>Название:</span><input #inputForTitle (keyup.enter)="action(inputForTitle.value)" [value]="task?.title" ><br>
   <span>Тип:</span>
   <mat-radio-group (change)="selectedType = $event.value">

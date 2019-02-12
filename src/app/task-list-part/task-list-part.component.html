@@ -1,0 +1,7 @@
+<div *ngIf="tasks?.length > 0">
+  <h3 >{{title}}</h3>
+  <div *ngFor="let task of tasks">
+    <app-task (editRequest)="editTaskRequest($event)" (deleteRequest)="deleteTaskRequest($event)" [task]="task"></app-task>
+  </div>
+  <p>===================================================</p>
+</div>

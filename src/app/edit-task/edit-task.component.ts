@@ -2,7 +2,6 @@ import {Component, Input, OnInit, Output, OnChanges, DoCheck, Inject} from '@ang
 import {Task} from "../../models/task.model";
 import {Types} from "../../models/types";
 import {EventEmitter} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {DataLocalStorageService} from "../../services/data-local-storage.service";
 
 
@@ -12,7 +11,6 @@ import {DataLocalStorageService} from "../../services/data-local-storage.service
 })
 export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   @Input() task: Task;
-  @Output() updateListRequest : EventEmitter<any> = new EventEmitter();
   @Output() closeDetailRequest: EventEmitter<boolean>= new EventEmitter();
   types = Types;
   selectedType: string;
@@ -42,8 +40,8 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
     this.task.title = title?title:"Новая таска";
     this.task.type = this.selectedType;
     this.task.deadLine = this.selectedDate;
-    this.dataLocalStorage.addTask(`${this.task.id}`, this.task);
-    // this.updateListRequest.emit();
+    this.dataLocalStorage.updateTask(this.task);
+
   }
 
   createTask(title: string){
@@ -55,8 +53,7 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
       }
     }
     this.task = new Task(title, this.selectedDate, this.selectedType, maxID);
-    this.dataLocalStorage.addTask(`${this.task.id}`, this.task);
-    // this.updateListRequest.emit();
+    this.dataLocalStorage.addTask(this.task);
     this.closeDetail();
   }
 
