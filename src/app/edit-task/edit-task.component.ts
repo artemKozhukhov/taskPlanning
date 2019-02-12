@@ -5,6 +5,7 @@ import {EventEmitter} from "@angular/core";
 import {DataLocalStorageService} from "../../services/data-local-storage.service";
 
 
+
 @Component({
   selector: 'app-edit-task',
   templateUrl: './edit-task.component.html'
@@ -22,7 +23,7 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   ngOnChanges(): void {
     this.actionLabel = this.task ? "Обновить" : "Создать";
     this.action = this.task ? this.updateTask : this.createTask;
-    this.selectedType = this.task ? this.task.type : "Неизвестный тип";
+    this.selectedType = this.task ? this.task.type : this.types.UNKNOWN;
     this.selectedDate = this.task ? this.task.deadLine : new Date();
   }
   ngOnInit() {

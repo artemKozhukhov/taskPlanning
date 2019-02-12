@@ -21,6 +21,7 @@ export class TaskListComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.dataLocalStorageService.getDataFromLocalStorage();
     this.tasks = this.dataLocalStorageService.getTasks();
+    console.log("при начальной загрузке пришли в лист таск", this.tasks);
     //при добавлении таймаута не обновляются таски в листе при изменении тасков в сервисе!!!!
     // setTimeout(()=>{
     //   this.updateList();

@@ -21,9 +21,10 @@ export class TaskListPartComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
   }
   ngOnChanges(): void {
-
+    console.log("в одну из частей листа пришли таски", this.tasks);
   }
 
   deleteTaskRequest(task: Task){

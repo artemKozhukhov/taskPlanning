@@ -21,6 +21,7 @@ export class DataLocalStorageService {
       }
       this.tasks[item.type].push(item);
     }
+    console.log("таски получены с хранилища",this.tasks);
   }
   getTasks(){
     return this.tasks;
