@@ -7,7 +7,7 @@
 //   "Личная", "Рабочая"
 // ];
 export const Types = {
-  WORKING:"Рабочая",
-  PERSONAL:"Личная",
-  UNKNOWN:"Неизвестный тип"
+  WORKING:"Рабочие таски",
+  PERSONAL:"Личные таски",
+  UNKNOWN:"Неизвестный тип тасков"
 };

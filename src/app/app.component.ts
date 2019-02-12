@@ -31,6 +31,9 @@ export class AppComponent {
   closeEditTask(){
     this.visualDetail = false;
   }
+  clearStorage(){
+    localStorage.clear();
+  }
 
 
 }
