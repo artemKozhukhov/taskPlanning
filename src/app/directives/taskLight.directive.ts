@@ -1,9 +1,9 @@
-import {Directive, ElementRef, Input,OnInit } from '@angular/core';
+import {Directive, ElementRef, Input,OnInit, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appTaskLight]'
 })
-export class TaskLightDirective implements OnInit{
+export class TaskLightDirective implements OnInit, OnChanges{
 
   @Input() taskDate: Date;
   currentDate: Date = new Date();
@@ -15,6 +15,9 @@ export class TaskLightDirective implements OnInit{
   }
 
   ngOnInit(): void {
+
+  }
+  ngOnChanges(): void {
     let msToTask = (+this.taskDate) - (+this.currentDate);
     if (msToTask > this.getMSFromDays(1)){
       this.el.nativeElement.style.backgroundColor = 'green';
@@ -26,4 +29,5 @@ export class TaskLightDirective implements OnInit{
       this.el.nativeElement.style.backgroundColor = 'red';
     }
   }
+
 }

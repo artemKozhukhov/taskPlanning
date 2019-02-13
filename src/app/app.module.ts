@@ -10,13 +10,14 @@ import { TaskComponent } from './task/task.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import {TaskListPartComponent} from "./task-list-part/task-list-part.component";
 import { EditTaskComponent } from './edit-task/edit-task.component';
-import {EditTaskButton} from "./edit-task-button/edit-task-button.component";
 import {DeleteTaskButton} from "./delete-task-button/delete-task-button.component";
 import {DataLocalStorageService} from "../services/data-local-storage.service";
+import {OpenEditorButtonComponent} from "./open-editor-button/open-editor-button.component";
 
 import {TaskTypesPipe} from "../pipes/task-types";
 import {TaskLightDirective} from "./directives/taskLight.directive";
 import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
+import {DeleteConfirmComponent} from "./delete-confirm/delete-confirm.component";
 
 @NgModule({
   declarations: [
@@ -25,10 +26,11 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
     TaskListComponent,
     TaskListPartComponent,
     EditTaskComponent,
-    EditTaskButton,
     DeleteTaskButton,
+    OpenEditorButtonComponent,
     TaskTypesPipe,
-    TaskLightDirective
+    TaskLightDirective,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import {MAT_DIALOG_DEFAULT_OPTIONS} from "@angular/material";
   providers: [
     DataLocalStorageService
   ],
-  entryComponents: [EditTaskComponent],
+  entryComponents: [EditTaskComponent, DeleteConfirmComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

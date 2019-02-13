@@ -3,5 +3,7 @@
   <p>Дата до: {{task.deadLine}}</p>
   <p>Тип: {{task.type}}</p>
   <button mat-raised-button (click)="edit()">редактировать</button>
-  <button mat-raised-button (click)="delete()">удалить</button>
+  <!--<button mat-raised-button (click)="delete()">удалить</button>-->
+  <delete-task-button (isDelete)="delete()"></delete-task-button>
+  <!--<open-editor-button [task]="task" title="открыть окно редактирования"></open-editor-button>-->
 </div>

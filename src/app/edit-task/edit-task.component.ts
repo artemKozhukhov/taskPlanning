@@ -3,6 +3,7 @@ import {Task} from "../../models/task.model";
 import {Types} from "../../models/types";
 import {EventEmitter} from "@angular/core";
 import {DataLocalStorageService} from "../../services/data-local-storage.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 
 
 
@@ -18,7 +19,10 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
   selectedDate: Date;
   actionLabel: string;
   action: any;
-  constructor(private dataLocalStorage: DataLocalStorageService) {}
+  constructor(private dataLocalStorage: DataLocalStorageService,
+              // public dialogRef: MatDialogRef<EditTaskComponent>,
+              // @Inject(MAT_DIALOG_DATA) public data: Task
+              ) {}
 
   ngOnChanges(): void {
     this.actionLabel = this.task ? "Обновить" : "Создать";
@@ -38,7 +42,7 @@ export class EditTaskComponent implements OnInit, OnChanges, DoCheck{
     this.task = null;
   }
   updateTask(title: string){
-    this.task.title = title?title:"Новая таска";
+    this.task.title = title;
     this.task.type = this.selectedType;
     this.task.deadLine = this.selectedDate;
     this.dataLocalStorage.updateTask(this.task);
